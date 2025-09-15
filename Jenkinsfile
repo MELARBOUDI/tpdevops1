@@ -1,5 +1,5 @@
 pipeline {
-    agent Agent_Docker   // Exécute sur serveur docker
+    agent { label 'Agent_Docker' }   // Exécute sur serveur docker
 
     stages {
         stage('Build') {
