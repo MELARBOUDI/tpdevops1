@@ -1,13 +1,15 @@
 pipeline {
-    agent { label 'Agent_Docker' }
-
+    agent {
+        docker {
+            image 'maven:3.9.9-eclipse-temurin-21'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
     stages {
-  	 stage('Test Docker') {
+        stage('Build') {
             steps {
-                sh 'which docker'
-                sh 'docker --version'
-                 } 
-
+                sh 'mvn -B'
+            }
         }
     }
 }
