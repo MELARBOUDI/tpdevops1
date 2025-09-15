@@ -1,24 +1,16 @@
 pipeline {
-    agent any   // Exécute sur n’importe quel agent disponible
+    agent { label 'Agent_Docker' }
 
     stages {
-        stage('Build') {
-            steps {
-                echo "TESTTTTTTTTTTTT1 !"
-                sh 'echo "DATE TEST : $(date)"'
+        stage('Test2') {
+            agent {
+                docker {
+                    image 'python:3.11'
+                }
             }
-        }
-
-        stage('Environment') {
             steps {
-                sh 'printenv'  
+                sh 'python --version'
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline terminé (succès ou échec).'
         }
     }
 }
