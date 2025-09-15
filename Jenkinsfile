@@ -1,5 +1,5 @@
 pipeline {
-    agent any   // Exécute sur n’importe quel agent disponible
+    agent Agent_Docker   // Exécute sur serveur docker
 
     stages {
         stage('Build') {
