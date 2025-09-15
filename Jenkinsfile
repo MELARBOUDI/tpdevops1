@@ -1,16 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.9-eclipse-temurin-21'
-            args '-v $HOME/.m2:/root/.m2'
-        }
-    }
+    agent { label 'Agent_Docker' }
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn -B'
+                git branch: 'luksor',
+                    url: 'https://github.com/MELARBOUDI/tpdevops1.git'
             }
         }
     }
 }
-
