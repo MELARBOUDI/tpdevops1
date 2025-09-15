@@ -9,11 +9,12 @@ pipeline {
         }
 		stage('Build') {
             steps {
+			  script {
                def customImage = docker.build("dretaux/tp_devops:v2")
 
                 /* Push the container to the custom Registry */
                 customImage.push()
-            
+			  }
             }
         }
     }
