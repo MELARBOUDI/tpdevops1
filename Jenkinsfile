@@ -22,6 +22,7 @@ pipeline {
 		 	steps {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
+				sh 'sleep 60' 
 				sh 'minikube kubectl -- port-forward --address 0.0.0.0 service/tpdevops 8082:80 &'
     			 }
 			}
