@@ -18,7 +18,7 @@ pipeline {
             }
         }
 		stage('Deploy') {
-			agent { label 'Agent_Kube' } 
+			agent { label 'Agent_Kube,Agent_dim' } 
 		 	steps {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
