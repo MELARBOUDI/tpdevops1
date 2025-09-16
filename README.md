@@ -1,7 +1,7 @@
 création d'une image docker
 désiré
 Mohamed
-fab add
+fab
 LOTFI
 dimitri
 Amélie
