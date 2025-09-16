@@ -34,7 +34,12 @@ pipeline {
 				 
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
 				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' //waiting deploy started 
-				withEnv(['BUILD_ID=dontKillMe']) { sh 'minikube kubectl --  -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80 &' }
+				
+                withEnv(['BUILD_ID=dontKillMe']) {
+                sh '''
+                    nohup minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80 > port-forward.log 2>&1 &
+                '''
+				}
     			 }
 			}
 		}
