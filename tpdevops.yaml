@@ -23,6 +23,7 @@ spec:
       containers:
         - name: tpdevops
           image: dretaux/tp_devops:v2
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---
