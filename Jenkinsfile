@@ -37,7 +37,7 @@ pipeline {
 				
                 withEnv(['BUILD_ID=dontKillMe']) {
                 sh '''
-                    nohup minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80 > port-forward.log 2>&1 &
+                    setsid --fork minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80
                 '''
 				}
     			 }
