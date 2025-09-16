@@ -18,7 +18,17 @@ pipeline {
             }
         }
 		stage('Deploy') {
-			agent { label 'Agent_Kube,Agent_dim' } 
+			agent { label 'Agent_Kube ' } 
+		 	steps {
+			 script {	
+				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
+				sh 'sleep 2' 
+				sh 'minikube kubectl -- port-forward --address 0.0.0.0 service/tpdevops 8082:80 &'
+    			 }
+			}
+		}
+		stage('Deploy Dim') {
+			agent { label 'Agent_dim ' } 
 		 	steps {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
