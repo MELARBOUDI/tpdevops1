@@ -22,7 +22,7 @@ pipeline {
 		 	steps {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
-				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' #waiting deploy started 
+				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' //waiting deploy started 
 				sh 'minikube kubectl -- port-forward --address 0.0.0.0 service/tpdevops 8082:80 &'
     			 }
 			}
@@ -32,7 +32,7 @@ pipeline {
 		 	steps {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
-				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' #waiting deploy started 
+				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' //waiting deploy started 
 				sh 'minikube kubectl -- port-forward --address 0.0.0.0 service/tpdevops 8082:80 &'
     			 }
 			}
