@@ -23,7 +23,7 @@ pipeline {
 			 script {	
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
 				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' //waiting deploy started 
-				sh 'BUILD_ID=dontKillMe screen -dmS toto "minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80" '
+				sh 'setsid minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80 &'
     			 }
 			}
 		}
@@ -35,7 +35,7 @@ pipeline {
 				sh 'minikube kubectl -- apply -f tpdevops.yaml -n tpdevops'
 				sh 'minikube kubectl -- rollout status deployment/tpdevops -n tpdevops --timeout=120s' //waiting deploy started 
 				
-                withEnv(['BUILD_ID=dontKillMe']) {
+                withEnv(['JENKINS_NODE_COOKIE=dontKillMe']) {
                 sh '''
                     setsid --fork minikube kubectl -- -n tpdevops port-forward --address 0.0.0.0 service/tpdevops 8082:80
                 '''
